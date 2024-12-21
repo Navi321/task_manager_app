@@ -32,7 +32,7 @@ class _SortButtonState extends State<SortButton> {
               icon: Icon(Icons.sort, color: Colors.white),
               color: Colors.grey[100],
               elevation: 8,
-              offset: Offset(5, -10),
+              offset: Offset(5, -5),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),

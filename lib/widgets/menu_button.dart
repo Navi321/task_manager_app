@@ -19,59 +19,50 @@ class _MenuButtonState extends State<MenuButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        AnimatedContainer(
-          duration: Duration(milliseconds: 300),
-          width: _isMenuOpen ? 160 : 0,
-          height: 56,
-          decoration: BoxDecoration(
-            color: Colors.cyan,
-            borderRadius: BorderRadius.circular(28),
-          ),
-          child: _isMenuOpen
-              ? Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                icon: Icon(Icons.settings, color: Colors.white),
-                onPressed: widget.onSettingsPressed,
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 300),
+      width: _isMenuOpen ? 200 : 56,
+      height: 56,
+      decoration: BoxDecoration(
+        color: Colors.cyan,
+        borderRadius: BorderRadius.circular(28),
+      ),
+      child: Row(
+        children: [
+          if (_isMenuOpen)
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.settings, color: Colors.white),
+                    onPressed: widget.onSettingsPressed,
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.add, color: Colors.white),
+                    onPressed: widget.onAddTaskPressed,
+                  ),
+                ],
               ),
-              IconButton(
-                icon: Icon(Icons.add, color: Colors.white),
-                onPressed: widget.onAddTaskPressed,
-              ),
-              IconButton(
-                icon: Icon(Icons.close, color: Colors.white),
-                onPressed: () {
-                  setState(() {
-                    _isMenuOpen = false;
-                  });
-                },
-              ),
-            ],
-          )
-              : SizedBox.shrink(),
-        ),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              _isMenuOpen = true;
-            });
-          },
-          child: AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            margin: EdgeInsets.only(left: 8),
-            width: _isMenuOpen ? 0 : 56,
-            height: 56,
-            decoration: BoxDecoration(
-              color: Colors.cyan,
-              shape: BoxShape.circle,
             ),
-            child: _isMenuOpen ? SizedBox.shrink() : Icon(Icons.menu, color: Colors.white),
+          Container(
+            width: 56,
+            height: 56,
+            alignment: Alignment.center,
+            child: IconButton(
+              icon: Icon(
+                _isMenuOpen ? Icons.close : Icons.menu,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                setState(() {
+                  _isMenuOpen = !_isMenuOpen;
+                });
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
