@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+class NewTaskScreen extends StatelessWidget {
+  const NewTaskScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build (BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Container(
@@ -14,7 +14,7 @@ class SettingsScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(22.0),
           ),
           child: Text(
-            'Settings',
+            'New Task',
             style: TextStyle(color: Colors.white),
           ),
         ),
@@ -23,7 +23,7 @@ class SettingsScreen extends StatelessWidget {
         elevation: 0,
       ),
       body: Center(
-        child: Text('Settings Screen'),
+        child: Text('New Task Screen'),
       ),
     );
   }

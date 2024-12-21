@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:task_manager_app/widgets/card.dart';
 import 'package:task_manager_app/widgets/menu_button.dart';
 import 'package:task_manager_app/widgets/showtaskdetails.dart';
+import 'package:task_manager_app/widgets/search_button.dart';
+import 'package:task_manager_app/widgets/sort_button.dart';
 import 'package:task_manager_app/screens/settings_screen.dart';
+import 'package:task_manager_app/screens/new_task_screen.dart';
 import 'package:task_manager_app/models/task.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -42,20 +45,44 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          ListView.builder(
-            itemCount: tasks.length,
-            itemBuilder: (context, index) {
-              return TaskCard(
-                task: tasks[index],
-                onOpenTask: () {
-                  showTaskDetails(context, tasks[index]);
-                },
-              );
-            },
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SearchButton(
+                      onSearch: (value) {
+                        print('Search: $value');
+                      },
+                    ),
+                    SortButton(
+                      onSort: (value) {
+                        print('Sort: $value');
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: tasks.length,
+                  itemBuilder: (context, index) {
+                    return TaskCard(
+                      task: tasks[index],
+                      onOpenTask: () {
+                        showTaskDetails(context, tasks[index]);
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
           Positioned(
             bottom: 20,
-            right: 1,
+            right: 16,
             child: MenuButton(
               onSettingsPressed: () {
                 Navigator.push(
@@ -66,7 +93,12 @@ class HomeScreen extends StatelessWidget {
                 );
               },
               onAddTaskPressed: () {
-                print('Add task pressed');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NewTaskScreen(),
+                  )
+                );
               },
             ),
           ),
