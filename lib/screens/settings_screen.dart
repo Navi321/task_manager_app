@@ -11,6 +11,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   String _selectedNotificationType = 'Audio and Push notifications';
   String _selectedTheme = 'System Default';
+  String _selectedLanguage = 'English';
 
   final List<String> _notificationOptions = [
     'Audio and Push notifications',
@@ -22,6 +23,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
     'Light',
     'Dark',
     'System Default',
+  ];
+
+  final List<String> _languageOptions = [
+    'English',
+    'Russian',
+    'Turkey',
+    'Spanish',
+    'French',
+    'German',
   ];
 
   @override
@@ -103,7 +113,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   maxHeight: 200,
                   offset: const Offset(0, 0),
                 ),
-              )
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Language',
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            DropdownButtonHideUnderline(
+              child: DropdownButton2(
+                value: _selectedLanguage,
+                items: _languageOptions.map((String option) {
+                  return DropdownMenuItem<String>(
+                    value: option,
+                    child: Text(option),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _selectedLanguage = newValue!;
+                  });
+                },
+                dropdownStyleData: DropdownStyleData(
+                  maxHeight: 200,
+                  offset: const Offset(0, 0),
+                ),
+              ),
             ),
           ],
         ),
@@ -111,5 +150,3 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 }
-
-// Все починилось, только при открытии списка он открывается от параметра в списке, то есть если выбран последний параметр то список открывается
