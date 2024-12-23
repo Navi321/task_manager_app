@@ -7,25 +7,13 @@ import 'package:task_manager_app/widgets/sort_button.dart';
 import 'package:task_manager_app/screens/settings_screen.dart';
 import 'package:task_manager_app/screens/new_task_screen.dart';
 import 'package:task_manager_app/models/task.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class HomeScreen extends StatelessWidget {
-  final List<Task> tasks = [
-    Task(
-      title: 'Task 1',
-      description: 'I need to make a small background bar that will only be behind the text',
-      category: 'Category 1',
-      date: DateTime.now(),
-    ),
-    Task(
-      title: 'Task 2',
-      description: 'Description 2',
-      category: 'Category 2',
-      date: DateTime.now(),
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final taskBox = Hive.box<Task>('tasks');
+
     return Scaffold(
       appBar: AppBar(
         title: Container(
@@ -54,26 +42,43 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     SearchButton(
                       onSearch: (value) {
-                        print('Search: $value');
+                        final filteredTasks = taskBox.values
+                            .where((task) => task.title.contains(value) || task.description.contains(value))
+                            .toList();
                       },
                     ),
                     SortButton(
-                      onSort: (value) {
-                        print('Sort: $value');
+                      onSort: (sortOption) {
+                        List<Task> sortedTasks = taskBox.values.toList();
+                        if (sortOption == 'Date') {
+                          sortedTasks.sort((a, b) => a.date.compareTo(b.date));
+                        } else if (sortOption == 'Category') {
+                          sortedTasks.sort((a, b) => a.category.compareTo(b.category));
+                        }
                       },
                     ),
                   ],
                 ),
               ),
               Expanded(
-                child: ListView.builder(
-                  itemCount: tasks.length,
-                  itemBuilder: (context, index) {
-                    return TaskCard(
-                      task: tasks[index],
-                      onOpenTask: () {
-                        showTaskDetails(context, tasks[index]);
-                      },
+                child: ValueListenableBuilder(
+                  valueListenable: taskBox.listenable(),
+                  builder: (context, Box<Task> box, _) {
+                    if (box.isEmpty) {
+                      return const Center(child: Text('No task available'));
+                    }
+
+                    return ListView.builder(
+                      itemCount: box.length,
+                      itemBuilder: (context, index) {
+                        final task = box.getAt(index);
+                        return TaskCard(
+                          task: task!,
+                          onOpenTask: () {
+                            showTaskDetails(context, task);
+                          },
+                        );
+                      }
                     );
                   },
                 ),

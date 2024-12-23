@@ -24,19 +24,41 @@ class _SortButtonState extends State<SortButton> {
       ),
       child: Row(
         children: [
+          Expanded(
+            child: AnimatedOpacity(
+              duration: Duration(milliseconds: 300),
+              opacity: _isExpanded ? 1 : 0,
+              child: _isExpanded
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      'Sort by',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                )
+                : SizedBox(),
+            ),
+          ),
           Container(
             width: 56,
             height: 56,
             alignment: Alignment.center,
             child: PopupMenuButton<String>(
               icon: Icon(Icons.sort, color: Colors.white),
-              color: Colors.grey[100],
+              color: Colors.white,
               elevation: 8,
               offset: Offset(5, -5),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
               constraints: BoxConstraints(maxWidth: 250),
+              onSelected: (String value) {
+                widget.onSort(value);
+                setState(() {
+                  _isExpanded = false;
+                });
+              },
               itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                 PopupMenuItem<String>(
                   value: 'date',

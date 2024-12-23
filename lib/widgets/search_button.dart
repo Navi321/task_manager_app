@@ -17,6 +17,7 @@ class _SearchButtonState extends State<SearchButton> {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
       width: _isSearching ? 200 : 56,
       height: 56,
       decoration: BoxDecoration(
@@ -34,10 +35,13 @@ class _SearchButtonState extends State<SearchButton> {
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.symmetric(horizontal: 16),
                 ),
+                onChanged: (value) {
+                  widget.onSearch(value);
+                },
                 onSubmitted: (value) {
                   widget.onSearch(value);
                   setState(() {
-                    _isSearching = false;
+                    _isSearching = value.isNotEmpty;
                   });
                 },
               ),
@@ -54,6 +58,7 @@ class _SearchButtonState extends State<SearchButton> {
               onPressed: () {
                 setState(() {
                   if (_isSearching) {
+                    widget.onSearch('');
                     _controller.clear();
                   }
                   _isSearching = !_isSearching;

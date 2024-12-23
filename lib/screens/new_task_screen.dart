@@ -1,5 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:task_manager_app/models/task.dart';
 
 class NewTaskScreen extends StatefulWidget {
   const NewTaskScreen({super.key});
@@ -135,9 +137,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
               const SizedBox(height: 16),
 
               ElevatedButton(
-                onPressed: () {
-                  // Logic to create task
-                },
+                onPressed: _createTask,
                 child: const Text('Create Task'),
               ),
             ],
@@ -166,7 +166,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Create New Category'),
+          title: const Text('Create new category'),
           content: TextField(
             decoration: const InputDecoration(hintText: 'Enter category name'),
             onSubmitted: (value) {
@@ -188,5 +188,33 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
         );
       },
     );
+  }
+
+  void _createTask() {
+    if (_taskTitleController.text.isEmpty ||
+        _taskDescriptionController.text.isEmpty ||
+        _selectedCategory == null ||
+        _selectedDate == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please fill all field')),
+      );
+      return;
+    }
+
+    final task = Task(
+      title: _taskTitleController.text,
+      description: _taskDescriptionController.text,
+      category: _selectedCategory!,
+      date: _selectedDate!,
+    );
+
+    final taskBox = Hive.box<Task>('tasks');
+    taskBox.add(task);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Task created successfully')),
+    );
+
+    Navigator.pop(context);
   }
 }

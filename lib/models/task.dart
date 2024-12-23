@@ -1,8 +1,22 @@
+import 'package:hive/hive.dart';
+
+part 'task.g.dart';
+
+@HiveType(typeId: 0)
 class Task {
+  @HiveField(0)
   String title;
+
+  @HiveField(1)
   String description;
+
+  @HiveField(2)
   String category;
+
+  @HiveField(3)
   DateTime date;
+
+  @HiveField(4)
   bool isCompleted;
 
   Task({
@@ -31,5 +45,25 @@ class Task {
       date: DateTime.parse(map['date']),
       isCompleted: map['isCompleted'] == 1,
     );
+  }
+}
+
+class TaskService {
+  final Box<Task> _taskBox = Hive.box<Task>('tasks');
+
+  List<Task> getAllTasks() {
+    return _taskBox.values.toList();
+  }
+
+  void addTask(Task task) {
+    _taskBox.add(task);
+  }
+
+  void updateTask(int index, Task task) {
+    _taskBox.putAt(index, task);
+  }
+
+  void deleteTask(int index) {
+    _taskBox.deleteAt(index);
   }
 }

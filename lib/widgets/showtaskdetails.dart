@@ -47,15 +47,6 @@ void showTaskDetails(BuildContext context, Task task) {
             ),
           ),
           actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text(
-                'Delete',
-                style: TextStyle(color: Colors.red),
-              ),
-            ),
             ElevatedButton(
               onPressed: () {
                 // Edit the task
