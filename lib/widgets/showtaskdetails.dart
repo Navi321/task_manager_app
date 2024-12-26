@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager_app/models/task.dart';
+import 'package:hive/hive.dart';
 
-void showTaskDetails(BuildContext context, Task task) {
+void showTaskDetails(BuildContext context, Task task, int taskIndex) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -56,6 +57,14 @@ void showTaskDetails(BuildContext context, Task task) {
              // style: ButtonStyle(
              //   backgroundColor: WidgetStateProperty.all(Colors.cyan),
              // ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                final taskBox = Hive.box<Task>('tasks');
+                taskBox.deleteAt(taskIndex);
+                Navigator.pop(context);
+              },
+              child: Text('Delete', style: TextStyle(color: Colors.red)),
             )
           ],
         ),

@@ -9,7 +9,36 @@ import 'package:task_manager_app/screens/new_task_screen.dart';
 import 'package:task_manager_app/models/task.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final ValueNotifier<List<Task>> _sortedTasksNotifier = ValueNotifier([]);
+
+  @override
+  void initState() {
+    super.initState();
+    final taskBox = Hive.box<Task>('tasks');
+    _sortedTasksNotifier.value = taskBox.values.toList();
+  }
+
+  void _sortTasks(String sortOption) {
+    final taskBox = Hive.box<Task>('tasks');
+    List<Task> sortedTasks = taskBox.values.toList();
+    if (sortOption == 'Date Ascending') {
+      sortedTasks.sort((a, b) => a.date.compareTo(b.date));
+    } else if (sortOption == 'Date Descending') {
+      sortedTasks.sort((a, b) => b.date.compareTo(a.date));
+    } else if (sortOption == 'Title Ascending') {
+      sortedTasks.sort((a, b) => a.title.compareTo(b.title));
+    } else if (sortOption == 'Title Descending') {
+      sortedTasks.sort((a, b) => b.title.compareTo(a.title));
+    }
+    _sortedTasksNotifier.value = sortedTasks;
+  }
+
   @override
   Widget build(BuildContext context) {
     final taskBox = Hive.box<Task>('tasks');
@@ -45,40 +74,38 @@ class HomeScreen extends StatelessWidget {
                         final filteredTasks = taskBox.values
                             .where((task) => task.title.contains(value) || task.description.contains(value))
                             .toList();
+                        _sortedTasksNotifier.value = filteredTasks;
                       },
                     ),
                     SortButton(
-                      onSort: (sortOption) {
-                        List<Task> sortedTasks = taskBox.values.toList();
-                        if (sortOption == 'Date') {
-                          sortedTasks.sort((a, b) => a.date.compareTo(b.date));
-                        } else if (sortOption == 'Category') {
-                          sortedTasks.sort((a, b) => a.category.compareTo(b.category));
-                        }
-                      },
+                      onSort: _sortTasks,
                     ),
                   ],
                 ),
               ),
               Expanded(
-                child: ValueListenableBuilder(
-                  valueListenable: taskBox.listenable(),
-                  builder: (context, Box<Task> box, _) {
-                    if (box.isEmpty) {
+                child: ValueListenableBuilder<List<Task>>(
+                  valueListenable: _sortedTasksNotifier,
+                  builder: (context, sortedTasks, _) {
+                    if (sortedTasks.isEmpty) {
                       return const Center(child: Text('No task available'));
                     }
 
                     return ListView.builder(
-                      itemCount: box.length,
-                      itemBuilder: (context, index) {
-                        final task = box.getAt(index);
-                        return TaskCard(
-                          task: task!,
-                          onOpenTask: () {
-                            showTaskDetails(context, task);
-                          },
-                        );
-                      }
+                        itemCount: sortedTasks.length,
+                        itemBuilder: (context, index) {
+                          final task = sortedTasks[index];
+                          return TaskCard(
+                            task: task,
+                            onOpenTask: () {
+                              showTaskDetails(context, task, index);
+                            },
+                            onDeleteTask: () {
+                              taskBox.deleteAt(index);
+                              _sortedTasksNotifier.value = taskBox.values.toList();
+                            },
+                          );
+                        }
                     );
                   },
                 ),
@@ -99,10 +126,10 @@ class HomeScreen extends StatelessWidget {
               },
               onAddTaskPressed: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NewTaskScreen(),
-                  )
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NewTaskScreen(),
+                    )
                 );
               },
             ),

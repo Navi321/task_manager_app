@@ -29,15 +29,15 @@ class _SortButtonState extends State<SortButton> {
               duration: Duration(milliseconds: 300),
               opacity: _isExpanded ? 1 : 0,
               child: _isExpanded
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text(
-                      'Sort by',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                )
-                : SizedBox(),
+                  ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  'Sort by',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              )
+                  : SizedBox(),
             ),
           ),
           Container(
@@ -61,23 +61,43 @@ class _SortButtonState extends State<SortButton> {
               },
               itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                 PopupMenuItem<String>(
-                  value: 'date',
+                  value: 'Date Ascending',
                   child: Row(
                     children: [
                       Icon(Icons.date_range, color: Colors.cyan),
                       SizedBox(width: 8),
-                      Text('Sort by Date', style: TextStyle(fontSize: 16)),
+                      Text('Date Ascending', style: TextStyle(fontSize: 16)),
+                    ],
+                  ),
+                ),
+                PopupMenuItem<String>(
+                  value: 'Date Descending',
+                  child: Row(
+                    children: [
+                      Icon(Icons.date_range, color: Colors.cyan),
+                      SizedBox(width: 8),
+                      Text('Date Descending', style: TextStyle(fontSize: 16)),
                     ],
                   ),
                 ),
                 PopupMenuDivider(),
                 PopupMenuItem<String>(
-                  value: 'category',
+                  value: 'Title Ascending',
                   child: Row(
                     children: [
-                      Icon(Icons.category, color: Colors.cyan),
+                      Icon(Icons.title, color: Colors.cyan),
                       SizedBox(width: 8),
-                      Text('Sort by Category', style: TextStyle(fontSize: 16)),
+                      Text('Title Ascending', style: TextStyle(fontSize: 16)),
+                    ],
+                  ),
+                ),
+                PopupMenuItem<String>(
+                  value: 'Title Descending',
+                  child: Row(
+                    children: [
+                      Icon(Icons.title, color: Colors.cyan),
+                      SizedBox(width: 8),
+                      Text('Title Descending', style: TextStyle(fontSize: 16)),
                     ],
                   ),
                 ),

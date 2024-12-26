@@ -4,8 +4,9 @@ import 'package:task_manager_app/models/task.dart';
 class TaskCard extends StatelessWidget {
   final Task task;
   final VoidCallback onOpenTask;
+  final VoidCallback onDeleteTask;
 
-  const TaskCard({Key? key, required this.task, required this.onOpenTask})
+  const TaskCard({Key? key, required this.task, required this.onOpenTask, required this.onDeleteTask})
       : super(key: key);
 
   @override
