@@ -128,7 +128,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => NewTaskScreen(),
+                      builder: (context) => NewTaskScreen(
+                        onTaskAdded: () {
+                          _sortedTasksNotifier.value = taskBox.values.toList();
+                        },
+                      ),
                     )
                 );
               },

@@ -4,7 +4,8 @@ import 'package:hive/hive.dart';
 import 'package:task_manager_app/models/task.dart';
 
 class NewTaskScreen extends StatefulWidget {
-  const NewTaskScreen({super.key});
+  final VoidCallback onTaskAdded;
+  const NewTaskScreen({super.key, required this.onTaskAdded});
 
   @override
   State<NewTaskScreen> createState() => _NewTaskScreenState();
@@ -215,6 +216,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
       const SnackBar(content: Text('Task created successfully')),
     );
 
+    widget.onTaskAdded();
     Navigator.pop(context);
   }
 }
