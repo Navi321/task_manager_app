@@ -98,7 +98,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           return TaskCard(
                             task: task,
                             onOpenTask: () {
-                              showTaskDetails(context, task, index);
+                              showTaskDetails(context, task, index, () {
+                                setState(() {
+                                  _sortedTasksNotifier.value = taskBox.values.toList();
+                                });
+                              });
                             },
                             onDeleteTask: () {
                               taskBox.deleteAt(index);
