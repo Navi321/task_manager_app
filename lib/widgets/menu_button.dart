@@ -21,7 +21,7 @@ class _MenuButtonState extends State<MenuButton> {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 300),
-      width: _isMenuOpen ? 200 : 56,
+      width: _isMenuOpen ? MediaQuery.of(context).size.width * 0.6 : 56,
       height: 56,
       decoration: BoxDecoration(
         color: Colors.cyan,
@@ -34,13 +34,17 @@ class _MenuButtonState extends State<MenuButton> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  IconButton(
-                    icon: Icon(Icons.settings, color: Colors.white),
-                    onPressed: widget.onSettingsPressed,
+                  Flexible(
+                    child: IconButton(
+                      icon: Icon(Icons.settings, color: Colors.white),
+                      onPressed: widget.onSettingsPressed,
+                    ),
                   ),
-                  IconButton(
-                    icon: Icon(Icons.add, color: Colors.white),
-                    onPressed: widget.onAddTaskPressed,
+                  Flexible(
+                    child: IconButton(
+                      icon: Icon(Icons.add, color: Colors.white),
+                      onPressed: widget.onAddTaskPressed,
+                    ),
                   ),
                 ],
               ),
