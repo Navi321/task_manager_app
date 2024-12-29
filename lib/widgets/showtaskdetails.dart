@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:task_manager_app/models/task.dart';
 import 'package:hive/hive.dart';
 
+import '../screens/edit_task_screen.dart';
+
 void showTaskDetails(BuildContext context, Task task, int taskIndex, VoidCallback onTaskDeleted) {
   showDialog(
     context: context,
@@ -50,8 +52,17 @@ void showTaskDetails(BuildContext context, Task task, int taskIndex, VoidCallbac
           actions: [
             ElevatedButton(
               onPressed: () {
-                // Edit the task
                 Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditTaskScreen(
+                      task: task,
+                      taskIndex: taskIndex,
+                      onTaskUpdated: onTaskDeleted,
+                    ),
+                  ),
+                );
               },
               child: Text('Edit', style: TextStyle(color: Colors.cyan)),
              // style: ButtonStyle(
