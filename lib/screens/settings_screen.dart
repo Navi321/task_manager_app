@@ -1,6 +1,8 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
+
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
@@ -45,7 +47,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             borderRadius: BorderRadius.circular(22.0),
           ),
           child: Text(
-            'Settings',
+            AppLocalizations.of(context).settings,
             style: TextStyle(color: Colors.white),
           ),
         ),

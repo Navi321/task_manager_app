@@ -3,6 +3,8 @@ import 'package:hive/hive.dart';
 import 'package:task_manager_app/models/task.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
+import '../l10n/app_localizations.dart';
+
 class EditTaskScreen extends StatefulWidget {
   final Task task;
   final int taskIndex;
@@ -81,7 +83,9 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Add Category'),
+          title: Text(
+              AppLocalizations.of(context).editTask,
+          ),
           content: TextField(
             controller: _categoryController,
             decoration: InputDecoration(labelText: 'Category Name'),

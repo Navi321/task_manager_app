@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:task_manager_app/models/task.dart';
 
+import '../l10n/app_localizations.dart';
+
 class NewTaskScreen extends StatefulWidget {
   final VoidCallback onTaskAdded;
   const NewTaskScreen({super.key, required this.onTaskAdded});
@@ -35,7 +37,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
             borderRadius: BorderRadius.circular(22.0),
           ),
           child: Text(
-            'New Task',
+            AppLocalizations.of(context).addTask,
             style: TextStyle(color: Colors.white),
           ),
         ),

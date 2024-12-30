@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager_app/l10n/app_localizations.dart';
 import 'package:task_manager_app/widgets/card.dart';
 import 'package:task_manager_app/widgets/menu_button.dart';
 import 'package:task_manager_app/widgets/showtaskdetails.dart';
@@ -52,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
             borderRadius: BorderRadius.circular(22.0),
           ),
           child: Text(
-            'My task',
+            AppLocalizations.of(context).title,
             style: TextStyle(color: Colors.white),
           ),
         ),
