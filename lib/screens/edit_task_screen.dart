@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:task_manager_app/models/task.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 
 class EditTaskScreen extends StatefulWidget {
   final Task task;
@@ -125,25 +126,35 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                 onSaved: (value) => _description = value!,
                 validator: (value) => value!.isEmpty ? 'Please enter a description' : null,
               ),
+              TextFormField(
+                readOnly: true,
+                decoration: InputDecoration(labelText: 'Date'),
+                controller: TextEditingController(text: _date.toLocal().toString().split(' ')[0]),
+                onTap: () => _selectDate(context),
+                validator: (value) => value!.isEmpty ? 'Please select a date' : null,
+              ),
               Row(
                 children: [
                   Expanded(
-                    child: DropdownButtonFormField<String>(
-                      value: _category,
-                      decoration: InputDecoration(labelText: 'Category'),
-                      items: _categories.map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          _category = newValue!;
-                        });
-                      },
-                      onSaved: (value) => _category = value!,
-                      validator: (value) => value == null ? 'Please select a category' : null,
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton2(
+                        value: _category,
+                        items: _categories.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            _category = newValue!;
+                          });
+                        },
+                        dropdownStyleData: DropdownStyleData(
+                          maxHeight: 200,
+                          offset: const Offset(0, 0),
+                        ),
+                      ),
                     ),
                   ),
                   IconButton(
@@ -151,13 +162,6 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                     onPressed: _showAddCategoryDialog,
                   ),
                 ],
-              ),
-              TextFormField(
-                readOnly: true,
-                decoration: InputDecoration(labelText: 'Date'),
-                controller: TextEditingController(text: _date.toLocal().toString().split(' ')[0]),
-                onTap: () => _selectDate(context),
-                validator: (value) => value!.isEmpty ? 'Please select a date' : null,
               ),
               SizedBox(height: 20),
               ElevatedButton(
