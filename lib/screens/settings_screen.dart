@@ -1,7 +1,9 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../l10n/app_localizations.dart';
+import '../providers/locale_provider.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -35,6 +37,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
     'French',
     'German',
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSelectedLanguage();
+  }
+
+  Future<void> _loadSelectedLanguage() async {
+    final prefs = await SharedPreferences.getInstance();
+    final languageCode = prefs.getString('language_code') ?? 'en';
+    setState(() {
+      _selectedLanguage = _languageOptions.firstWhere(
+          (language) => language.toLowerCase().startsWith(languageCode),
+          orElse: () => 'English'
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,6 +157,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onChanged: (String? newValue) {
                   setState(() {
                     _selectedLanguage = newValue!;
+                    _changeLanguage(newValue);
                   });
                 },
                 dropdownStyleData: DropdownStyleData(
@@ -150,5 +170,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       ),
     );
+  }
+
+  void _changeLanguage(String language) {
+    Locale newLocale;
+    switch (language) {
+      case 'Russian':
+        newLocale = Locale('ru');
+        break;
+      case 'Turkey':
+        newLocale = Locale('tr');
+        break;
+      case 'Spanish':
+        newLocale = Locale('es');
+        break;
+      case 'French':
+        newLocale = Locale('fr');
+        break;
+      case 'German':
+        newLocale = Locale('de');
+        break;
+      default:
+        newLocale = Locale('en');
+    }
+    Provider.of<LocaleProvider>(context, listen: false).setLocale(newLocale);
   }
 }
