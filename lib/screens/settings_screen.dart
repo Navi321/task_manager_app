@@ -80,7 +80,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Notification Type',
+              AppLocalizations.of(context).notificationType,
               style: TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
@@ -109,7 +109,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             SizedBox(height: 16),
             Text(
-              'App Theme',
+              AppLocalizations.of(context).theme,
               style: TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
@@ -138,7 +138,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             SizedBox(height: 16),
             Text(
-              'Language',
+              AppLocalizations.of(context).language,
               style: TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,

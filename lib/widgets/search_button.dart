@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SearchButton extends StatefulWidget {
   final ValueChanged<String> onSearch;
 
-  const SearchButton({Key? key, required this.onSearch}) : super(key: key);
+  const SearchButton({super.key, required this.onSearch});
 
   @override
   _SearchButtonState createState() => _SearchButtonState();

@@ -10,7 +10,7 @@ class EditTaskScreen extends StatefulWidget {
   final int taskIndex;
   final VoidCallback onTaskUpdated;
 
-  EditTaskScreen({required this.task, required this.taskIndex, required this.onTaskUpdated});
+  const EditTaskScreen({super.key, required this.task, required this.taskIndex, required this.onTaskUpdated});
 
   @override
   _EditTaskScreenState createState() => _EditTaskScreenState();
@@ -22,7 +22,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
   late String _description;
   late String _category;
   late DateTime _date;
-  List<String> _categories = ['Category 1', 'Category 2', 'Category 3'];
+  final List<String> _categories = ['Category 1', 'Category 2', 'Category 3'];
 
   @override
   void initState() {
@@ -110,7 +110,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Task'),
+        title: Text(AppLocalizations.of(context).editTask),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
