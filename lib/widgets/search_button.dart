@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 
 class SearchButton extends StatefulWidget {
   final ValueChanged<String> onSearch;
@@ -31,7 +32,7 @@ class _SearchButtonState extends State<SearchButton> {
               child: TextField(
                 controller: _controller,
                 decoration: InputDecoration(
-                  hintText: 'Search...',
+                  hintText: AppLocalizations.of(context).search,
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.symmetric(horizontal: 16),
                 ),

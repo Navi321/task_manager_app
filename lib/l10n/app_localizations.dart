@@ -21,9 +21,15 @@ class AppLocalizations {
       'task_description': 'Task Description',
       'category': 'Category',
       'date': 'Date',
+      'enter_title': 'Enter task title',
+      'enter_description': 'Enter task description',
+      'select_category': 'Select a category',
+      'no_select_date': 'No date selected',
+      'selected_date': 'Selected date:',
       'edit_task': 'Edit Task',
       'edit': 'Edit',
       'delete_task': 'Delete Task',
+      'save': 'Save',
       'settings': 'Settings',
       'notification_type': 'Notification Type',
       'theme': 'Theme',
@@ -37,9 +43,15 @@ class AppLocalizations {
       'task_description': 'Описание задачи',
       'category': 'Категория',
       'date': 'Дата',
+      'enter_title': 'Введите название задачи',
+      'enter_description': 'Введите описание задачи',
+      'select_category': 'Выберите категорию',
+      'no_select_date': 'Дата не выбрана',
+      'selected_date': 'Выбранная дата:',
       'edit_task': 'Редактировать задачу',
       'edit': 'Редактировать',
       'delete_task': 'Удалить задачу',
+      'save': 'Сохранить',
       'settings': 'Настройки',
       'notification_type': 'Тип уведомления',
       'theme': 'Тема',
@@ -53,9 +65,15 @@ class AppLocalizations {
       'task_description': 'Görev Açıklaması',
       'category': 'Kategori',
       'date': 'Tarih',
+      'enter_title': 'Görev başlığını girin',
+      'enter_description': 'Görev açıklamasını girin',
+      'select_category': 'Bir kategori seçin',
+      'no_select_date': 'Tarih seçilmedi',
+      'selected_date': 'Seçilen tarih:',
       'edit_task': 'Görevi Düzenle',
       'edit': 'Düzenle',
       'delete_task': 'Görevi Sil',
+      'save': 'Kaydet',
       'settings': 'Ayarlar',
       'notification_type': 'Bildirim Türü',
       'theme': 'Tema',
@@ -69,9 +87,15 @@ class AppLocalizations {
       'task_description': 'Descripción de la tarea',
       'category': 'Categoría',
       'date': 'Fecha',
+      'enter_title': 'Introduzca el título de la tarea',
+      'enter_description': 'Introduzca la descripción de la tarea',
+      'select_category': 'Seleccionar una categoría',
+      'no_select_date': 'Fecha no seleccionada',
+      'selected_date': 'Fecha seleccionada:',
       'edit_task': 'Editar tarea',
       'edit': 'Editar',
       'delete_task': 'Eliminar tarea',
+      'save': 'Guardar',
       'settings': 'Ajustes',
       'notification_type': 'Tipo de notificación',
       'theme': 'Tema',
@@ -85,9 +109,15 @@ class AppLocalizations {
       'task_description': 'Description de la tâche',
       'category': 'Catégorie',
       'date': 'Date',
+      'enter_title': 'Entrez le titre de la tâche',
+      'enter_description': 'Entrez la description de la tâche',
+      'select_category': 'Sélectionnez une catégorie',
+      'no_select_date': 'Aucune date sélectionnée',
+      'selected_date': 'Date sélectionnée:',
       'edit_task': 'Modifier la tâche',
       'edit': 'Modifier',
       'delete_task': 'Supprimer la tâche',
+      'save': 'Enregistrer',
       'settings': 'Paramètres',
       'notification_type': 'Type de notification',
       'theme': 'Thème',
@@ -101,9 +131,15 @@ class AppLocalizations {
       'task_description': 'Aufgabenbeschreibung',
       'category': 'Kategorie',
       'date': 'Datum',
+      'enter_title': 'Geben Sie den Aufgabentitel ein',
+      'enter_description': 'Geben Sie die Aufgabenbeschreibung ein',
+      'select_category': 'Wählen Sie eine Kategorie',
+      'no_select_date': 'Kein Datum ausgewählt',
+      'selected_date': 'Ausgewähltes Datum:',
       'edit_task': 'Aufgabe bearbeiten',
       'edit': 'Bearbeiten',
       'delete_task': 'Aufgabe löschen',
+      'save': 'Speichern',
       'settings': 'Einstellungen',
       'notification_type': 'Benachrichtigungstyp',
       'theme': 'Thema',
@@ -118,9 +154,15 @@ class AppLocalizations {
   String get taskDescription => _localizedValues[locale.languageCode]!['task_description']!;
   String get category => _localizedValues[locale.languageCode]!['category']!;
   String get date => _localizedValues[locale.languageCode]!['date']!;
+  String get enterTitle => _localizedValues[locale.languageCode]!['enter_title']!;
+  String get enterDescription => _localizedValues[locale.languageCode]!['enter_description']!;
+  String get selectCategory => _localizedValues[locale.languageCode]!['select_category']!;
+  String get noSelectDate => _localizedValues[locale.languageCode]!['no_select_date']!;
+  String get selectedDate => _localizedValues[locale.languageCode]!['selected_date']!;
   String get editTask => _localizedValues[locale.languageCode]!['edit_task']!;
   String get edit => _localizedValues[locale.languageCode]!['edit']!;
   String get deleteTask => _localizedValues[locale.languageCode]!['delete_task']!;
+  String get save => _localizedValues[locale.languageCode]!['save']!;
   String get settings => _localizedValues[locale.languageCode]!['settings']!;
   String get notificationType => _localizedValues[locale.languageCode]!['notification_type']!;
   String get theme => _localizedValues[locale.languageCode]!['theme']!;

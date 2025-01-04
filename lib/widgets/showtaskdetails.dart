@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager_app/models/task.dart';
 import 'package:hive/hive.dart';
-
+import '../l10n/app_localizations.dart';
 import '../screens/edit_task_screen.dart';
 
 void showTaskDetails(BuildContext context, Task task, int taskIndex, VoidCallback onTaskDeleted) {
@@ -64,10 +64,7 @@ void showTaskDetails(BuildContext context, Task task, int taskIndex, VoidCallbac
                   ),
                 );
               },
-              child: Text('Edit', style: TextStyle(color: Colors.cyan)),
-             // style: ButtonStyle(
-             //   backgroundColor: WidgetStateProperty.all(Colors.cyan),
-             // ),
+              child: Text(AppLocalizations.of(context).edit, style: TextStyle(color: Colors.cyan)),
             ),
             ElevatedButton(
               onPressed: () {
@@ -78,7 +75,7 @@ void showTaskDetails(BuildContext context, Task task, int taskIndex, VoidCallbac
                 }
                 Navigator.pop(context);
               },
-              child: Text('Delete', style: TextStyle(color: Colors.red)),
+              child: Text(AppLocalizations.of(context).deleteTask, style: TextStyle(color: Colors.red)),
             )
           ],
         ),

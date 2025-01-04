@@ -120,22 +120,22 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
             children: [
               TextFormField(
                 initialValue: _title,
-                decoration: InputDecoration(labelText: 'Title'),
+                decoration: InputDecoration(labelText: AppLocalizations.of(context).taskTitle),
                 onSaved: (value) => _title = value!,
-                validator: (value) => value!.isEmpty ? 'Please enter a title' : null,
+                validator: (value) => value!.isEmpty ? AppLocalizations.of(context).enterTitle : null,
               ),
               TextFormField(
                 initialValue: _description,
-                decoration: InputDecoration(labelText: 'Description'),
+                decoration: InputDecoration(labelText: AppLocalizations.of(context).taskDescription),
                 onSaved: (value) => _description = value!,
-                validator: (value) => value!.isEmpty ? 'Please enter a description' : null,
+                validator: (value) => value!.isEmpty ? AppLocalizations.of(context).enterDescription : null,
               ),
               TextFormField(
                 readOnly: true,
-                decoration: InputDecoration(labelText: 'Date'),
+                decoration: InputDecoration(labelText: AppLocalizations.of(context).date),
                 controller: TextEditingController(text: _date.toLocal().toString().split(' ')[0]),
                 onTap: () => _selectDate(context),
-                validator: (value) => value!.isEmpty ? 'Please select a date' : null,
+                validator: (value) => value!.isEmpty ? AppLocalizations.of(context).noSelectDate : null,
               ),
               Row(
                 children: [
@@ -170,7 +170,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _saveTask,
-                child: Text('Save'),
+                child: Text(AppLocalizations.of(context).save),
               ),
             ],
           ),

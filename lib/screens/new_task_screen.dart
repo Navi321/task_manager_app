@@ -51,33 +51,33 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Task Title',
+              Text(
+                AppLocalizations.of(context).taskTitle,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               TextField(
                 controller: _taskTitleController,
-                decoration: const InputDecoration(
-                  hintText: 'Enter task title',
+                decoration: InputDecoration(
+                  hintText: AppLocalizations.of(context).enterTitle,
                 ),
               ),
               const SizedBox(height: 16),
 
-              const Text(
-                'Task Description',
+              Text(
+                AppLocalizations.of(context).taskDescription,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               TextField(
                 controller: _taskDescriptionController,
-                decoration: const InputDecoration(
-                  hintText: 'Enter task description',
+                decoration: InputDecoration(
+                  hintText: AppLocalizations.of(context).enterDescription,
                 ),
                 maxLines: 3,
               ),
               const SizedBox(height: 16),
 
-              const Text(
-                'Category',
+              Text(
+                AppLocalizations.of(context).category,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               DropdownButtonFormField2<String>(
@@ -87,7 +87,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                   ),
                 ),
                 isExpanded: true,
-                hint: const Text('Select a category'),
+                hint:  Text(AppLocalizations.of(context).selectCategory),
                 value: _selectedCategory,
                 items: _categories
                     .map((String category) => DropdownMenuItem<String>(
@@ -117,8 +117,8 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
               ),
               const SizedBox(height: 16),
 
-              const Text(
-                'Date',
+              Text(
+                AppLocalizations.of(context).date,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Row(
@@ -126,8 +126,8 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                   Expanded(
                     child: Text(
                       _selectedDate != null
-                          ? 'Selected date: ${_selectedDate!.toLocal()}'.split(' ')[0]
-                          : 'No date selected',
+                          ? '${AppLocalizations.of(context).selectedDate} ${_selectedDate!.toLocal()}'.split(' 0')[0]
+                          : AppLocalizations.of(context).noSelectDate,
                       style: const TextStyle(fontSize: 16),
                     ),
                   ),
