@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
+
 class SortButton extends StatefulWidget {
   final ValueChanged<String> onSort;
 
@@ -66,7 +68,7 @@ class _SortButtonState extends State<SortButton> {
                     children: [
                       Icon(Icons.date_range, color: Colors.cyan),
                       SizedBox(width: 8),
-                      Text('Date Ascending', style: TextStyle(fontSize: 16)),
+                      Text(AppLocalizations.of(context).dateAsc, style: TextStyle(fontSize: 16)),
                     ],
                   ),
                 ),
@@ -76,7 +78,7 @@ class _SortButtonState extends State<SortButton> {
                     children: [
                       Icon(Icons.date_range, color: Colors.cyan),
                       SizedBox(width: 8),
-                      Text('Date Descending', style: TextStyle(fontSize: 16)),
+                      Text(AppLocalizations.of(context).dateDesc, style: TextStyle(fontSize: 16)),
                     ],
                   ),
                 ),
@@ -87,7 +89,7 @@ class _SortButtonState extends State<SortButton> {
                     children: [
                       Icon(Icons.title, color: Colors.cyan),
                       SizedBox(width: 8),
-                      Text('Title Ascending', style: TextStyle(fontSize: 16)),
+                      Text(AppLocalizations.of(context).titleAsc, style: TextStyle(fontSize: 16)),
                     ],
                   ),
                 ),
@@ -97,7 +99,7 @@ class _SortButtonState extends State<SortButton> {
                     children: [
                       Icon(Icons.title, color: Colors.cyan),
                       SizedBox(width: 8),
-                      Text('Title Descending', style: TextStyle(fontSize: 16)),
+                      Text(AppLocalizations.of(context).titleDesc, style: TextStyle(fontSize: 16)),
                     ],
                   ),
                 ),

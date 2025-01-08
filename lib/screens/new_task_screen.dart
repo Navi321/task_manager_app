@@ -141,7 +141,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
 
               ElevatedButton(
                 onPressed: _createTask,
-                child: const Text('Create Task'),
+                child: Text(AppLocalizations.of(context).createTask),
               ),
             ],
           ),
@@ -169,9 +169,9 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Create new category'),
+          title: Text(AppLocalizations.of(context).createCategory),
           content: TextField(
-            decoration: const InputDecoration(hintText: 'Enter category name'),
+            decoration: InputDecoration(hintText: AppLocalizations.of(context).enterCategory),
             onSubmitted: (value) {
               if (value.isNotEmpty) {
                 setState(() {
@@ -185,7 +185,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Cancel'),
+              child: Text(AppLocalizations.of(context).cancel),
             ),
           ],
         );
